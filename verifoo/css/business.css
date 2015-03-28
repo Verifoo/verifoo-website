@@ -1,0 +1,52 @@
+div#businessRCol h1{
+	color:#0a53b9;
+}
+
+
+div#businessRCol h3 {
+	margin-top: 32px;
+}
+.bDescription {
+	display: inline-block;
+	vertical-align: top;
+	width: 480px;
+	margin-left: 4px;
+}
+.businessControl{
+	-webkit-border-radius: 4px;
+  	-moz-border-radius: 4px; 
+  	border-radius: 4px;
+  	border: 1px solid #578FDB;
+  	background: #dad8d3;
+  	display: inline-block;
+	padding: 4px 12px;
+	margin: 16px 8px 4px;
+	font-weight: bold;
+	color:#578fdc;
+}
+.reviewlist {
+	border-bottom: 1px dashed #ffcc00;
+	padding: 8px 4px 16px 4px;
+}
+.reviewlist:hover {
+  background: #e4e9ee;
+}
+.reviewlist .reviewPhoto img,
+.reviewlist .ureviewPhoto img{
+	border-radius: 4px;
+	border: 1px solid #ccc;
+}
+
+div#review_photos,
+div#review_list  {
+	margin-top: 8px;
+}
+.reviewUL {
+	font-size: 11px;
+	line-height: 16px;
+	margin-top: 8px;
+}
+.reviewUL a{
+	display:block;
+}
+

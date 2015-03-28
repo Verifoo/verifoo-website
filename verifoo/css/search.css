@@ -1,0 +1,65 @@
+.searchbDescription {
+	display: inline-block;
+	vertical-align: top;
+	width: 100%;
+	margin-left: 4px;
+}
+.cvBprofile{
+	display:inline-block;
+	vertical-align:top;
+}
+.cvBprofile img{border: 1px solid #ccc;}
+.cvBdesc{
+	display:inline-block;
+	vertical-align:top;
+	width: 404px;
+    margin-left: 4px;
+}
+.cvBDescription {
+	margin: 32px 0px;
+}
+.cvbD{
+	display: inline-block;
+	vertical-align: top;
+	width: 480px;
+	margin-left: 4px;
+}
+.cvBButtons{
+	-webkit-border-radius: 4px;
+  	-moz-border-radius: 4px; 
+  	border-radius: 4px;
+  	border: 1px solid #578FDB;
+  	background: #dad8d3;
+  	display: inline-block;
+	padding: 4px 12px;
+	margin: 16px 8px 4px;
+	font-weight: bold;
+	color:#578fdc;
+}
+ul.related{margin-left: 0px;}
+ul.related li{display:inline-block; margin-right:16px;}
+.businesslist {
+	text-align: center;
+}
+.searchBlist div.businesslist{
+	text-align: center;
+	margin: 0 auto;
+	margin-bottom: 8px;
+	padding: 8px 2px;
+	background: #F7F6F4;
+	width: 195px;
+
+}
+div#searchLCol {
+	width: 200px;
+	vertical-align: top;
+	float: left;
+	position: relative;
+	margin-right: 12px;
+}
+#searchlist .sblist {
+	margin-bottom: 9px;
+	border: 1px solid #EFEFEF;
+	background: #F5F6F7;
+	padding: 8px;
+}
