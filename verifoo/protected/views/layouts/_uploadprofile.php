@@ -3,9 +3,9 @@
 	<?php 
 		
 		$form=$this->beginWidget('CActiveForm', array(
-		'id'=>'mainlayoutmodal-form',
+		'id'=>'uploadprofile-form',
 		'enableAjaxValidation'=>false,
-		'action' => Yii::app()->createUrl('user/profile',array('id'=>Yii::app()->user->id)),
+		'action' => Yii::app()->createUrl('user/profile/updateimage',array('id'=>Yii::app()->user->id)),
 		'htmlOptions' => array('enctype'=>'multipart/form-data'),
 	)); ?>
 		<div class="row">

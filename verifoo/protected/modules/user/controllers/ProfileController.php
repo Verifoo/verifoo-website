@@ -14,6 +14,7 @@ class ProfileController extends Controller
 	 */
 	public function actionProfile()
 	{
+		
 		if(isset($_POST['User']))
 		{
 			$model = $this->loadUser();
@@ -38,8 +39,7 @@ class ProfileController extends Controller
 					CustomImage::customUnlink($oldfilename,'users');
 		        }
 				
-		    }                  
-			exit;
+		    }       
         }
 		$model = $this->loadUser();
 	    $this->render('profile',array(
@@ -48,7 +48,42 @@ class ProfileController extends Controller
 	    ));
 	}
 
+	public function actionUpdateimage($id)
+	{
+		$model=$this->loadUser($id);
+		if(isset($_POST['User']))
+		{
+			
+			$oldfilename = $model->image;
+			$model=$this->loadUser($id);
+			$file =CUploadedFile::getInstance($model,'image');
+			if (is_object($file) && get_class($file)==='CUploadedFile') {
+				$model->image = $file;
+				 $newname = time().".".Yii::app()->user->id.".".strtolower($file->extensionName);
+			}else{
+				$model->image = $oldfilename;
+			}
+		    if (is_object($file) && get_class($file)==='CUploadedFile') {
 
+		        $fileDirectory = Yii::app()->basePath.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'uploads'.DIRECTORY_SEPARATOR.'images/users/originals/';
+					
+		        $model->image->saveAs($fileDirectory.$newname);
+				$model->image = $newname;
+		        if ($oldfilename != ''&& file_exists(Yii::getPathOfAlias('webroot.uploads.images/users/originals').DIRECTORY_SEPARATOR.$oldfilename)) {
+		        	 unlink($fileDirectory. $oldfilename);
+					CustomImage::customUnlink($oldfilename,'users');
+		        }
+
+		    }   
+		}
+			if($model->save()){
+				
+				//$this->redirect(Yii::app()->user->returnUrl);
+
+				$this->redirect(array('/user/profile'));
+			}
+		
+	} 
 	/**
 	 * Updates a particular model.
 	 * If update is successful, the browser will be redirected to the 'view' page.

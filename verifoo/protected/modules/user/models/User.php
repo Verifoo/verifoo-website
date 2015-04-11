@@ -76,8 +76,9 @@ class User extends CActiveRecord
 			array('username', 'unique', 'message' => UserModule::t("This user's name already exists.")),
 			array('username', 'match', 'pattern' => '/^[A-Za-z0-9_]+$/u','message' => UserModule::t("Incorrect symbols (A-z0-9).")),
 			array('email', 'unique', 'message' => UserModule::t("This user's email address already exists.")),
+			array('id, username, password, email, zipcode, activkey, create_at, lastvisit_at, superuser, status, bday, image', 'safe', 'on'=>'search'),
 		):array(
-			array('id, username, password, email, zipcode, activkey, create_at, lastvisit_at, superuser, status, bday, image	', 'safe', 'on'=>'search'),
+			array('id, username, password, email, zipcode, activkey, create_at, lastvisit_at, superuser, status, bday, image', 'safe', 'on'=>'search'),
 		)));
 	}
 

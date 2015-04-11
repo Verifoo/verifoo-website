@@ -43,7 +43,8 @@
 
 else:	
 		$model = User::model()->findbyPk(Yii::app()->user->id);
-		$this->renderPartial('//layouts/userlayoutleftCol', array('model'=>$model)); 
+		$this->renderPartial('//layouts/userlayoutleftCol', array('model'=>$model));
+		Yii::app()->user->returnUrl = Yii::app()->request->requestUri; 
 ?>
 <div id="rightCol">
 	<div class="searchMainBox">

@@ -34,7 +34,7 @@
 				    'header' => 'Profile Picture',
 				    'content' => $this->renderPartial('//layouts/_uploadprofile',array('picture'=>$picture,'subject'=>'js:$("#subject").val()','body'=>'js:$("#body").val()'), true),
 				    'footer' => array(
-				        TbHtml::button('Upload Photo', array('onclick' => '$("#mainlayoutmodal-form").submit();','data-dismiss' => 'modal', 'color' => TbHtml::BUTTON_COLOR_PRIMARY)),
+				        TbHtml::button('Upload Photo', array('onclick' => '$("#uploadprofile-form").submit();','data-dismiss' => 'modal', 'color' => TbHtml::BUTTON_COLOR_PRIMARY)),
 				        TbHtml::button('Close', array('data-dismiss' => 'modal')),
 				     ),
 				 )); 
