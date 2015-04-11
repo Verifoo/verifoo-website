@@ -15,7 +15,7 @@
 			</a>
 		<div class="reviewUL">
 			<?php if(isset(Yii::app()->user->id) && Yii::app()->user->id==$data->reviewer_id):?>
-				<a class="" href="" id="eReview<?php echo $data->reviewer_id;?>">Edit Review</a>
+				<a class="" href="<?php echo Yii::app()->createUrl('review/edit',array('id'=>$data->id));?>" id="eReview<?php echo $data->reviewer_id;?>">Edit Review</a>
 			<?php endif;?>
 			
 		</div>

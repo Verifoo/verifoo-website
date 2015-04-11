@@ -173,7 +173,8 @@ div.wide.form .buttons, div.wide.form .hint, div.wide.form .errorMessage
 }
 .loginDiv {
 	padding: 12px;
-	width: auto;
+	width: 460px;
+	text-align: left;
 	display:inline-block;
 	vertical-align:top;
 }
@@ -189,3 +190,18 @@ div.wide.form .buttons, div.wide.form .hint, div.wide.form .errorMessage
 .verifooRegister select{
 	width: 257px;
 }
+.verticalCheckbox
+{
+	margin: 10px;
+	width: 80%;
+}
+
+.verticalCheckbox .item
+{
+	float:left;
+	padding:2px 8px;
+	overflow: auto;
+  	width: 256px;
+}
+div.form .verticalCheckbox label{display:inline-block;}
+div.form .verticalCheckbox input{margin-right:4px;}

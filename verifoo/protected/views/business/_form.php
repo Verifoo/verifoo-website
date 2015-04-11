@@ -88,7 +88,7 @@ else {
 
 <style>
   #mapCanvas {
-    width: 500px;
+    width: 464px;
     height: 400px;
   }
   </style>
@@ -105,7 +105,7 @@ else {
 )); ?>
 
 	<p class="note">Fields with <span class="required">*</span> are required.</p>
-
+	<div class="lRow">
 	<?php echo $form->errorSummary($model); ?>
 	<?php if(isset($model->logo) && $model->logo!=''){ ?>
 	<div class="row">
@@ -226,24 +226,22 @@ else {
     		array('prepend' => 'https://plus.google.com/',  'span' => 2)); ?>
 		<?php echo $form->error($profile,'gplus_page'); ?>
 	</div>
-	<div class="row">
-		<?php echo $form->labelEx($model,'category'); ?>
-	</div>
-	<div class="rowCategory">
-	
-	<?php
-		//$model->category= array("Apparel & Jewelry","Automotive");
-		echo $form->checkBoxList($model, 'category', $category);
-		/*foreach($category as $cat)
-		{
-			 echo TbHtml::checkBox('category[]', false, array('label' => $cat));
-		}*/
-	?>
-	</div>
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
 	</div>
-
+	
+	</div>
+	<div class="rRow">
+		<div class="row">
+		<?php echo $form->labelEx($model,'category'); ?>
+			<div class="rowCategory">
+			<?php
+				//$model->category= array("Apparel & Jewelry","Automotive");
+				echo $form->checkBoxList($model, 'category', $category);
+			?>
+			</div>
+		</div>
+	</div>
 <?php $this->endWidget(); ?>
 
 </div><!-- form -->

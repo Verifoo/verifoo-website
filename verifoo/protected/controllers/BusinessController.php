@@ -57,7 +57,6 @@ class BusinessController extends Controller
 		$bmodel = $this->loadModel($id);
 		if(isset($_POST['Review']))
 		{
-			//$reviewCheck = Review::model()->findByAttributes(array('condition'=>'user_id=:userID && business_id=:bID','params'=>array(':rID'=>$_POST['Review']['reviewer_id'],':bID'=>$_POST['Review']['business_id'])));
 			
 			$reviewModel->attributes=$_POST['Review'];
 			$reviewCheck = Review::model()->find('reviewer_id=:rID && business_id=:bID',array(':rID'=>$_POST['Review']['reviewer_id'],':bID'=>$_POST['Review']['business_id']));
@@ -82,7 +81,25 @@ class BusinessController extends Controller
 			    'params'=>array(':userID'=>Yii::app()->user->id,':bID'=>$bmodel->id),
 			));
 		
-		
+		$photos=new CActiveDataProvider('Businessphoto', array(
+		    'criteria'=>array('condition'=>'bp.business_id='.$id.'&& bp.status = 1',
+		    'alias'=>'bp',
+		    'with'=>array('user'=>array('alias'=>'u','with'=>array('profile'=>array('alias'=>'profile')))),
+		    
+		    ),
+		    'pagination'=>array('pageSize'=>'5'),
+		));
+		$needapprovalphotos = array();	
+		if($bmodel->user_id==Yii::app()->user->id){
+			$needapprovalphotos=new CActiveDataProvider('Businessphoto', array(
+			    'criteria'=>array('condition'=>'bp.business_id='.$id.'&& bp.status = 0',
+			    'alias'=>'bp',
+			    'with'=>array('user'=>array('alias'=>'u','with'=>array('profile'=>array('alias'=>'profile')))),
+			    
+			    ),
+			    'pagination'=>array('pageSize'=>'5'),
+			));	
+		}
 		
 		$reviews=new CActiveDataProvider('Review', array(
 		    'criteria'=>array('condition'=>'business_id='.$bmodel->id,
@@ -94,7 +111,7 @@ class BusinessController extends Controller
 		));	
 		$this->render('view',array(
 			'model'=>$bmodel,'reviewmodel'=>$reviewModel,'profile'=>$bmodel->businessprofile,
-			'reviews'=>$reviews,'exists'=>$existReview,
+			'reviews'=>$reviews,'exists'=>$existReview,'photos'=>$photos,'needapprovalphotos'=>$needapprovalphotos,
 		));
 	}
 	public function actionFollow()
@@ -110,7 +127,7 @@ class BusinessController extends Controller
 				$model->user_id = Yii::app()->user->id;
 				$model->datefollowed = date("Y-m-d H:i:s");
 				$model->save();
-				echo CJSON::encode(array('status'=>' Stop Following','id'=>$model->id));
+				echo CJSON::encode(array('status'=>'Following','id'=>$model->id));
 			}else{
 				$following=Businessfollow::model()->find(array(
 					    'select'=>'id',

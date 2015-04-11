@@ -9,11 +9,14 @@ $this->menu=array(
     array('label'=>UserModule::t('Change password'), 'url'=>array('changepassword')),
     array('label'=>UserModule::t('Logout'), 'url'=>array('/user/logout')),
 );
-?><h2><?php echo ucwords($profile->firstname." ".$profile->lastname); 
+?>
+<?php $this->renderPartial('//layouts/userlayoutleftCol', array('model'=>$model)); ?>
+<div id="rightCol">
+<h3><?php echo ucwords($profile->firstname." ".$profile->lastname); 
 	  if(Yii::app()->user->id==$model->id){
-	  	 echo"<span class='h2span'><a href='".Yii::app()->createUrl('user/profile/edit')."'>( Edit Profile )</a></span>";}
+	  	 echo"<span class='h3span'><a href='".Yii::app()->createUrl('user/profile/edit')."'>( Edit Profile )</a></span>";}
 	  ?> 
-  </h2>
+  </h3>
 
 <?php if(Yii::app()->user->hasFlash('profileMessage')): ?>
 <div class="success">
@@ -51,3 +54,4 @@ $this->widget('bootstrap.widgets.TbAlert', array(
 			}//$profile->getAttribute($field->varname)
 		}?>
 	</div>
+</div>

@@ -1,7 +1,9 @@
 div#businessRCol h1{
 	color:#0a53b9;
 }
-
+.reviewChart{
+	background: #f4f4f4;
+}
 
 div#businessRCol h3 {
 	margin-top: 32px;
@@ -27,9 +29,6 @@ div#businessRCol h3 {
 .reviewlist {
 	border-bottom: 1px dashed #ffcc00;
 	padding: 8px 4px 16px 4px;
-}
-.reviewlist:hover {
-  background: #e4e9ee;
 }
 .reviewlist .reviewPhoto img,
 .reviewlist .ureviewPhoto img{

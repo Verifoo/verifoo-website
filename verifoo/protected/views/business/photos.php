@@ -12,15 +12,12 @@
 			<li class="activepage">
 				Photos
 			</li>
-			<li class="btn-primary">
-				<a href="<?php echo Yii::app()->createUrl('business/photos', array('id' => $model->id));?>">Posts</a>
-			</li>
 		</ul>
 	</div>
-<h2><?php echo $model->businessname; 
+<h3><?php echo $model->businessname; 
 			echo '<div class="bStars">';
 					//for($x=1;$x<=$numstar;$x++)
-					 echo '<div class="star" style="width:'.(16*round($model->reviewAve)).'px"></div>';
+					 echo '<div class="star" style="width:'.(22*round($model->reviewAve)).'px"></div>';
 				
 			echo'</div>';
 		if(Yii::app()->user->id==$model->user_id){
@@ -30,7 +27,7 @@
 		}
 		//echo $model->reviewSum."--".$model->reviewCount.":".round($model->reviewSum/$model->reviewCount);
 	?>
-</h2>
+</h3>
 
 <div class="businessInfo">
 	<?php 
@@ -66,7 +63,20 @@
 </div>
 <div class="businessphotos">
 <h3>Photos </h3>
+
 <?php
+
+		$this->widget('application.extensions.fancybox.EFancyBox', array(
+		    'target'=>'.fancybox',
+		    
+		    'config'=>array( 	'nextEffect'=> 'fade',
+		    					'prevEffect'=>'fade',
+		    					'helpers'=>array('title'=>array('type'=>'inside')),
+		    					'beforeShow'=>'function(){alert(1);}',
+		    					'afterShow'=>'function(){twttr.widgets.load();}'
+						   ),
+		));
+		
 	$emptyText = 'No photos uploaded yet';
 $this->widget('zii.widgets.CListView', array(
 					'dataProvider'=>$photos,

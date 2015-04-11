@@ -14,7 +14,7 @@ Yii::app()->user->returnUrl = Yii::app()->request->requestUri;
 				<a href="<?php echo Yii::app()->createUrl('profile/photos', array('id' => $model->id));?>">Photos</a>
 			</li>
 			<li class="btn-primary">
-				<a href="<?php echo Yii::app()->createUrl('profile/activities', array('id' => $model->id));?>">Activities</a>
+				<a href="<?php echo Yii::app()->createUrl('profile/reviews', array('id' => $model->id));?>">Reviews</a>
 			</li>
 		</ul>
 	</div>	

@@ -5,13 +5,9 @@
  *
  * The followings are the available columns in table 'userfollow':
  * @property string $id
- * @property integer $user_id
- * @property integer $follower_id
+ * @property string $user_id
+ * @property string $follower_id
  * @property string $datefollowed
- *
- * The followings are the available model relations:
- * @property Users $follower
- * @property Users $user
  */
 class Userfollow extends CActiveRecord
 {
@@ -31,8 +27,8 @@ class Userfollow extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('user_id, follower_id, datefollowed', 'required'),
-			array('user_id, follower_id', 'numerical', 'integerOnly'=>true),
+			array('id, user_id, follower_id, datefollowed', 'required'),
+			array('id, user_id, follower_id', 'length', 'max'=>20),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, user_id, follower_id, datefollowed', 'safe', 'on'=>'search'),
@@ -47,8 +43,6 @@ class Userfollow extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'follower' => array(self::BELONGS_TO, 'User', 'follower_id'),
-			'user' => array(self::BELONGS_TO, 'User', 'user_id'),
 		);
 	}
 
@@ -84,8 +78,8 @@ class Userfollow extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id,true);
-		$criteria->compare('user_id',$this->user_id);
-		$criteria->compare('follower_id',$this->follower_id);
+		$criteria->compare('user_id',$this->user_id,true);
+		$criteria->compare('follower_id',$this->follower_id,true);
 		$criteria->compare('datefollowed',$this->datefollowed,true);
 
 		return new CActiveDataProvider($this, array(

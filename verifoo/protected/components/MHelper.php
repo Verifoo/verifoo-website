@@ -56,7 +56,7 @@ class MHelper
  */
 abstract class MHelperBase
 {
-	protected static $_trash = array();
+	protected $_trash = array();
 	
 	protected function _functionExists($name)
 	{

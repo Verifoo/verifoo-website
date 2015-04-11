@@ -90,6 +90,15 @@ $this->breadcrumbs=array(
 			}
 		}
 ?>
+	<div class="row">
+		<?php echo $form->labelEx($userinterest,'category'); ?>
+			<div class="verticalCheckbox">
+			<?php
+				//$model->category= array("Apparel & Jewelry","Automotive");
+				echo $form->checkBoxList($userinterest, 'interests', $category,array('template' => '<div class="item">{input}{label}</div>', 'separator' => ''));
+			?>
+			</div>
+	</div>
 	<?php if (UserModule::doCaptcha('registration')): ?>
 	<div class="row">
 		<?php echo $form->labelEx($model,'verifyCode'); ?>
@@ -104,7 +113,7 @@ $this->breadcrumbs=array(
 	<?php endif; ?>
 	
 	<div class="row submit">
-		<?php echo CHtml::submitButton(UserModule::t("Register")); ?>
+		<?php echo CHtml::submitButton(UserModule::t("Register"), array('class'=>'bCtrl bCtrl1',)); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

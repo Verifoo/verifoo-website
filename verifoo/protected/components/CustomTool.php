@@ -5,6 +5,7 @@ class CustomTool{
 	        "Arts & Antiques" => "Arts & Antiques",
 	        "Automotive"=>"Automotive",
 	        "Aviation & Marine"=>"Aviation & Marine",
+	        "Beach & Resorts"=>"Beach & Resorts",
 	        "Books & Magazines"=>"Books & Magazines",
 	        "Cellphones & Accessories"=>"Cellphones & Accessories",
 	        "Clinic"=>"Clinic",
@@ -15,16 +16,17 @@ class CustomTool{
 	        "Gifts & Flowers"=>"Gifts & Flowers",
 	        "Health, Fitness, Beauty"=>"Health, Fitness, Beauty",
 	        "Home & Garden"=>"Home & Garden",
+	        "Hotels"=>"Hotels",
 	        "Internet & Hosting"=>"Internet & Hosting",
 	        "Legal & Financial"=>"Legal & Financial",
 	        "Music, Instruments, CDs"=>"Music, Instruments, CDs",
+	        "Nightlife"=>"Nightlife",
 	        "Office Furniture"=>"Office Furniture",
 	        "Machines & Supplies"=>"Machines & Supplies",
 	        "Pets & Supplies"=>"Pets & Supplies",
 	        "Prints"=>"Prints",
 	        "Real Estate"=>"Real Estate",
 	        "Recreation"=>"Recreation",
-	        "Resort"=>"Resort",
 	        "Restaurant"=>"Restaurant",
 	        "Review Center"=>"Review Center",
 	        "Services"=>"Services",
@@ -38,7 +40,7 @@ class CustomTool{
     {
         return $this->ARRAY_CATEGORY;
     }	
-	public function getMonthsArray()
+	public static function getMonthsArray()
     {
         for($monthNum = 1; $monthNum <= 12; $monthNum++){
             $months[$monthNum] = date('F', mktime(0, 0, 0, $monthNum, 1));
@@ -47,7 +49,7 @@ class CustomTool{
         return $months;
     }
 	 
-    public function getDaysArray()
+    public static function getDaysArray()
     {
         for($dayNum = 1; $dayNum <= 31; $dayNum++){
             $days[$dayNum] = $dayNum;
@@ -73,7 +75,7 @@ class CustomTool{
 			return ucwords($user->profile['firstname']." ".substr($user->profile['lastname'], 0,1).".");
 		return false;
 	}
-    public function getYearsArray()
+    public static function getYearsArray()
     {
         $thisYear = date('Y', time()) -18;
 

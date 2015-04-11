@@ -6,15 +6,11 @@
  * The followings are the available columns in table 'businessphoto':
  * @property string $id
  * @property string $business_id
- * @property integer $photo_owner
+ * @property string $photo_owner
  * @property string $photoname
  * @property string $description
  * @property integer $status
  * @property string $dateuploaded
- *
- * The followings are the available model relations:
- * @property Users $photoOwner
- * @property Business $business
  */
 class Businessphoto extends CActiveRecord
 {
@@ -35,8 +31,8 @@ class Businessphoto extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('business_id, photo_owner, photoname, dateuploaded', 'required'),
-			array('photo_owner, status', 'numerical', 'integerOnly'=>true),
-			array('business_id', 'length', 'max'=>20),
+			array('status', 'numerical', 'integerOnly'=>true),
+			array('business_id, photo_owner', 'length', 'max'=>20),
 			array('photoname', 'length', 'max'=>100),
 			array('description', 'length', 'max'=>255),
 			// The following rule is used by search().
@@ -53,8 +49,8 @@ class Businessphoto extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'business' => array(self::HAS_ONE, 'Business', 'business_id'),
 			'user' => array(self::BELONGS_TO, 'User', 'photo_owner'),
-			'business' => array(self::BELONGS_TO, 'Business', 'business_id'),
 		);
 	}
 
@@ -94,7 +90,7 @@ class Businessphoto extends CActiveRecord
 
 		$criteria->compare('id',$this->id,true);
 		$criteria->compare('business_id',$this->business_id,true);
-		$criteria->compare('photo_owner',$this->photo_owner);
+		$criteria->compare('photo_owner',$this->photo_owner,true);
 		$criteria->compare('photoname',$this->photoname,true);
 		$criteria->compare('description',$this->description,true);
 		$criteria->compare('status',$this->status);

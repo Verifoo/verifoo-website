@@ -1,6 +1,13 @@
 <?php 
  $this->layout='//layouts/main';
 ?>
+<?php /*<div class="sfunction">
+	<div class="sfLogo">
+		<img src="<?php echo Yii::app()->getBaseUrl(true).'/images/mascot-search.png' ?>" alt="Verifoo Logo" />
+	</div>
+</div>
+ * 
+ */?>
 <div class="sBDisplay">
 		<h2><?php echo UserModule::t("Keyword search: ").$keyword; ?></h2>
 		<div class="form">

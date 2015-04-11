@@ -6,12 +6,8 @@
  * The followings are the available columns in table 'businessfollow':
  * @property string $id
  * @property string $business_id
- * @property integer $user_id
+ * @property string $user_id
  * @property string $datefollowed
- *
- * The followings are the available model relations:
- * @property Users $user
- * @property Business $business
  */
 class Businessfollow extends CActiveRecord
 {
@@ -32,8 +28,7 @@ class Businessfollow extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('business_id, user_id, datefollowed', 'required'),
-			array('user_id', 'numerical', 'integerOnly'=>true),
-			array('business_id', 'length', 'max'=>20),
+			array('business_id, user_id', 'length', 'max'=>20),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, business_id, user_id, datefollowed', 'safe', 'on'=>'search'),
@@ -48,8 +43,6 @@ class Businessfollow extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'user' => array(self::BELONGS_TO, 'User', 'user_id'),
-			'business' => array(self::BELONGS_TO, 'Business', 'business_id'),
 		);
 	}
 
@@ -86,7 +79,7 @@ class Businessfollow extends CActiveRecord
 
 		$criteria->compare('id',$this->id,true);
 		$criteria->compare('business_id',$this->business_id,true);
-		$criteria->compare('user_id',$this->user_id);
+		$criteria->compare('user_id',$this->user_id,true);
 		$criteria->compare('datefollowed',$this->datefollowed,true);
 
 		return new CActiveDataProvider($this, array(

@@ -1,0 +1,35 @@
+.pageLH {
+  	background: #0a53b9;
+  	margin: 0 auto;
+  	text-align: center;
+	padding-top: 32px;
+}
+.pageLH #indexLogoText {
+  font-size: 52px;
+  line-height: 52px;
+}
+.pageLH .tagline {
+  font-family: 'GothamRoundedMedium';
+  font-size: 16px;
+  -webkit-border-radius: 16px;
+  -moz-border-radius: 16px;
+  border-radius: 16px;
+  border: 2px solid #fff;
+  color: #fff;
+  text-align: center;
+}
+.pagelayout-container {  text-align: center;}
+.pagelayout-container h1{text-align: center;}
+.pagelayout-container p, .pagelayout-container ul {
+  text-align: left;
+}
+.pageLH div#logo {
+  width: 128px;
+  margin: 0 auto;
+}
+.pageLH .d_text {
+  margin-bottom: 16px;
+}
+@media only screen and (max-width:1024px){
+	.topHeaderWrapper {width: 94%;}
+} 

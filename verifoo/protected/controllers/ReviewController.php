@@ -2,6 +2,7 @@
 
 class ReviewController extends Controller
 {
+	public $layout='//layouts/userlayout';
 	public function actionIndex()
 	{
 		
@@ -10,10 +11,9 @@ class ReviewController extends Controller
 	public function actionEdit($id)
 	{
 		$model=$this->loadModel($id);
-		
+		$umodel = User::model()->findByPk(Yii::app()->user->id);
 		if(isset($_POST['Review']))
 		{
-			//$reviewCheck = Review::model()->findByAttributes(array('condition'=>'user_id=:userID && business_id=:bID','params'=>array(':rID'=>$_POST['Review']['reviewer_id'],':bID'=>$_POST['Review']['business_id'])));
 			
 			$model->attributes=$_POST['Review'];
 			
@@ -29,7 +29,7 @@ class ReviewController extends Controller
 		}
 		if($model->reviewer_id== Yii::app()->user->id){
 			$this->render('edit',array(
-				'model'=>$model,
+				'model'=>$model,'user_model'=>$umodel,
 			));
 		}else {
 			$this->redirect(array('review/index','id'=>$model->reviewer_id));		

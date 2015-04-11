@@ -14,7 +14,7 @@
 					)); ?>
 			<?php //endif;
 			if(isset(Yii::app()->user->id))
-				{
+			{
 					
 					$this->widget('bootstrap.widgets.TbModal', array(
 				    'id' => 'sendmessage-form',
@@ -25,8 +25,9 @@
 				        TbHtml::button('Close', array('data-dismiss' => 'modal')),
 				     ),
 				 	)); 
-				}		
-			if($picture->id==Yii::app()->user->id):
+
+
+				if($picture->id==Yii::app()->user->id):
 				
 				 $this->widget('bootstrap.widgets.TbModal', array(
 				    'id' => 'tbmodal-form1',
@@ -60,7 +61,9 @@
 					echo '<a href="#" class=" btn btn-primary thPic" id="uaddfriend'.$model->id.'" addfriend-id="'.$model->id.'">Add friend</a>';
 				}	
 				
-			endif;
+			endif; 	
+			}		
+			
 		?>
 			
 				
@@ -71,42 +74,38 @@
 			<?php if(isset(Yii::app()->user->id)):
 					if(Yii::app()->user->id!=$model->id):
 				?>
-				<li><a href="#" class="" id="ufollow<?php if(isset(Yii::app()->user->id)){ echo $model->id;}?>" user-id="<?php echo $model->id;?>"  >Follow </a></li>
-				<li><a href="#" data-toggle = 'modal' data-target ='#sendmessage-form' id="usend<?php echo $model->id;?>" user-id="<?php echo $model->id;?>" send-id="<?php //echo $following;?>" >Send message</a></li>
-				
-			<?php
+					<li><a href="#" class="" id="ufollow<?php if(isset(Yii::app()->user->id)){ echo $model->id;}?>" user-id="<?php echo $model->id;?>"  ><?php echo TbHtml::icon(TbHtml:: ICON_PLUS_SIGN)." Follow ";?></a></li>
+					<li><a href="#" data-toggle = 'modal' data-target ='#sendmessage-form' id="usend<?php echo $model->id;?>" user-id="<?php echo $model->id;?>" send-id="<?php //echo $following;?>" ><?php echo TbHtml::icon(TbHtml::ICON_ENVELOPE)." Send message ";?> </a></li>
+				<?php
 					else:
+						
 							if($model->superuser==1):?>
 								<li><a href="<?php echo Yii::app()->createUrl('business/admin');?>" class="" >Businesses</a></li>
 								<li><a href="<?php echo Yii::app()->createUrl('user/admin');?>" class="" >Members</a></li>
 					  <?php else:
 									$b=Business::model()->count('user_id=:uID',array(':uID'=>$model->id));
-									 if($b>0):
-								?>
-								<li><a href="<?php echo Yii::app()->createUrl('profile/business');?>" class="" >Your Businesses</a></li>
+									 if($b>0):?>
+										<li><a href="<?php echo Yii::app()->createUrl('profile/business');?>" class="" ><?php echo TbHtml::icon(TbHtml::ICON_MAP_MARKER)." Your Businesses ";?></a></li>
 							<?php  endif;
 							endif;
 					endif;
 				else:
 			?>
-				<li><a href="<?php echo Yii::app()->createUrl('user/login');?>" class="" >Follow</a></li>
-				<li><a href="<?php echo Yii::app()->createUrl('user/login');?>" class="" >Send message</a></li>			
-				<li><a href="<?php echo Yii::app()->createUrl('user/login');?>" class="" >Add friend</a></li>
+				
 			
 			<?php endif;?>
 				
-				<li><a href="<?php echo Yii::app()->createUrl('profile/photos');?>" class="" >Photos</a></li>
-				<li><a href="<?php echo Yii::app()->createUrl('profile/reviews');?>" class="">
-					<?php 
-								$n=Review::model()->count('reviewer_id=:uID',array(':uID'=>$model->id));
-								echo $n
-					?> Reviews</a></li>
-				<li><a href="<?php echo Yii::app()->createUrl('profile/favoriteslist');?>" class="" >Favorite list</a></li>
+				<li><a href="<?php echo Yii::app()->createUrl('profile/photos',array('id'=>$model->id));?>" class="" ><?php echo TbHtml::icon(TbHtml::ICON_CAMERA)." Photos ";?> </a></li>
+				<li><a href="<?php echo Yii::app()->createUrl('profile/reviews',array('id'=>$model->id));?>" class="">
+						<?php 	$n=Review::model()->count('reviewer_id=:uID',array(':uID'=>$model->id));
+								echo TbHtml::icon(TbHtml::ICON_STAR)." ".$n." Reviews ";?> 
+					</a></li>
+				<li><a href="<?php echo Yii::app()->createUrl('$n." /fa." voriteslist');?>" class="" ><?php echo TbHtml::icon(TbHtml::ICON_TH_LIST)." Favorite list ";?> </a></li>
 				<li><a href="<?php echo Yii::app()->createUrl('profile/friends',array('id'=>$model->id));?>" class="" >
 						<?php 
 								$n=Friend::model()->count('user_id=:uID && confirm=1',array(':uID'=>$model->id));
-								echo $n
-						?> Friends</a></li>
+								echo TbHtml::icon(TbHtml::ICON_USER)." ".$n." Friends ";?>
+					</a></li>
 			</ul>
 			
 		</div>

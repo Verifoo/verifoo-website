@@ -1,9 +1,12 @@
+<?php $this->renderPartial('//layouts/userlayoutleftCol', array('model'=>$user_model)); ?>
+<div id="rightCol">
 <h3>Edit your Review</h3>
 <?php
 
 $this->renderPartial('_form', array('model'=>$model)); 
 
 ?>
+</div>
 <script type="text/javascript">
  	$(document).ready(function() {
 		 $("#Review_comment").limit({

@@ -19,16 +19,20 @@
 </head>
 
 <body>
-<?php /*<div id="header">
-	<div id="logo">
-		<a href="<?php echo Yii::app()->getBaseUrl(true);?>"><img src="<?php echo Yii::app()->getBaseUrl(true).'/images/logo.256.gif' ?>"/></a>
-		<?php //echo CHtml::encode(Yii::app()->name); ?>
+<?php /*<div id="header">	
+	<div id="headerInner">
+		<div id="logo">
+			<a href="<?php echo Yii::app()->getBaseUrl(true);?>"><img src="<?php echo Yii::app()->getBaseUrl(true).'/images/logo.256.gif' ?>"/></a>
+			<?php //echo CHtml::encode(Yii::app()->name); ?>
+		</div>
 	</div>
 </div>*/?>
 <div id="topOfHeader">
-		<div class="topHeaderWrapper"><span>Questions? Give us a call (123) 456-78</span>
+		<div class="topHeaderWrapper">
 			
-				<?php $this->widget('zii.widgets.CMenu',array(
+				<?php 
+				$this->renderPartial('//layouts/_headerSearch');
+				$this->widget('zii.widgets.CMenu',array(
 				'items'=>array(
 					array('label'=>'Home', 'url'=>array('../')),
 					array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),

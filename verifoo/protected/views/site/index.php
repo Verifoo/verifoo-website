@@ -1,8 +1,4 @@
-<?php
-/* @var $this SiteController */
-
-$this->pageTitle=Yii::app()->name;
-?>
+<?php $this->pageTitle=Yii::app()->name;?>
 
 <?php if(Yii::app()->user->isGuest):?>
 
@@ -24,7 +20,7 @@ $this->pageTitle=Yii::app()->name;
 				<?php echo CHtml::textField('searchname', '',array('id'=>'idSearch', 'width'=>100, 'maxlength'=>100,'class'=>'indexSearch','placeholder'=>'Enter business to search')); ?>
 				<div class="bottom2Body">
 					<?php echo CHtml::submitButton('Verifoo Search', array('class'=>'i_sub', 'name'=>'bsearch')); ?>
-					<div class="i_sub2">About Verifoo</div>
+					<a href="<?php echo Yii::app()->createUrl('site/page', array('view'=>'about'));?>"><div class="i_sub2">About Verifoo</div>
 				</div>
 			<?php echo CHtml::endForm(); ?>
 		</div>
@@ -45,15 +41,13 @@ $this->pageTitle=Yii::app()->name;
  
  endif;
 
-else:?>
-<?php $this->renderPartial('//layouts/userlayoutleftCol', array('model'=>$model,'profile'=>$profile)); ?>
+else:	
+		$model = User::model()->findbyPk(Yii::app()->user->id);
+		$this->renderPartial('//layouts/userlayoutleftCol', array('model'=>$model)); 
+?>
 <div id="rightCol">
 	<div class="searchMainBox">
-		<div class="form">
-				<?php echo CHtml::beginForm($this->createUrl('search/index'),'GET',array()); ?> 
-					<?php echo TbHtml::textField('searchname', '',array('id'=>'idSearch','append' => TbHtml::submitButton('Search', array('color' => TbHtml::BUTTON_COLOR_PRIMARY,)) , 'span' => 13,'placeholder' => 'Enter business to search...')); ?>
-				<?php echo CHtml::endForm(); ?>
-		</div>
+		
 	</div>
 	<?php
 	

@@ -1,8 +1,25 @@
+.sfunction{
+	margin:0 auto;
+}
+.bCtrl, div.form .bCtrl {
+  border-radius: 18px;
+  width: 128px;
+  padding: 8px 2px;
+  text-align: center;
+  color: #fff;
+  display: inline-block;
+  margin-top:8px;
+}
+.bCtrl1, div.form .bCtrl1 {background: #fdb813;}
+.bCtrl2, div.form .bCtrl2 {background: #0a53b9;}
+.bCtrl3, div.form .bCtrl3 {background: #363636;}
 .searchbDescription {
 	display: inline-block;
 	vertical-align: top;
 	width: 100%;
-	margin-left: 4px;
+}
+p.businessfield {
+  margin: 0 0 4px;
 }
 .cvBprofile{
 	display:inline-block;
@@ -41,6 +58,7 @@ ul.related li{display:inline-block; margin-right:16px;}
 .businesslist {
 	text-align: center;
 }
+#searchlist .card-1 a {margin: 0 4px;}
 .searchBlist div.businesslist{
 	text-align: center;
 	margin: 0 auto;
@@ -56,10 +74,4 @@ div#searchLCol {
 	float: left;
 	position: relative;
 	margin-right: 12px;
-}
-#searchlist .sblist {
-	margin-bottom: 9px;
-	border: 1px solid #EFEFEF;
-	background: #F5F6F7;
-	padding: 8px;
 }

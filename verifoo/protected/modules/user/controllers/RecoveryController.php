@@ -3,7 +3,7 @@
 class RecoveryController extends Controller
 {
 	public $defaultAction = 'recovery';
-	
+	public $layout='//layouts/searchlayout';
 	/**
 	 * Recovery password
 	 */
@@ -38,6 +38,7 @@ class RecoveryController extends Controller
 		    		}
 		    	} else {
 			    	if(isset($_POST['UserRecoveryForm'])) {
+			    		
 			    		$form->attributes=$_POST['UserRecoveryForm'];
 			    		if($form->validate()) {
 			    			$user = User::model()->notsafe()->findbyPk($form->user_id);

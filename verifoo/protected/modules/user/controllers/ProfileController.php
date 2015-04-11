@@ -3,7 +3,7 @@
 class ProfileController extends Controller
 {
 	public $defaultAction = 'profile';
-	public $layout='//layouts/main';
+	public $layout='//layouts/userlayout';
 
 	/**
 	 * @var CActiveRecord the currently loaded data model instance.
@@ -18,7 +18,8 @@ class ProfileController extends Controller
 		{
 			$model = $this->loadUser();
 			$oldfilename = $model->image;
-			$file =CUploadedFile::getInstance($model,'image');
+			
+			$file = CUploadedFile::getInstance($model,'image');
 			if (is_object($file) && get_class($file)==='CUploadedFile') {
 				$model->image = $file;
 				 $newname = time().".".Yii::app()->user->id.".".strtolower($file->extensionName);
@@ -27,6 +28,7 @@ class ProfileController extends Controller
 			}
 		    if (is_object($file) && get_class($file)==='CUploadedFile') {
 		        $fileDirectory = Yii::app()->basePath.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'uploads'.DIRECTORY_SEPARATOR.'images/users/originals/';
+				
 				
 		        $model->image->saveAs($fileDirectory.$newname);
 				$model->image = $newname;
@@ -37,7 +39,7 @@ class ProfileController extends Controller
 		        }
 				
 		    }                  
-			
+			exit;
         }
 		$model = $this->loadUser();
 	    $this->render('profile',array(

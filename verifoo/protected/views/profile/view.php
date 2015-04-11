@@ -12,7 +12,7 @@
 				<a href="<?php echo Yii::app()->createUrl('profile/photos', array('id' => $model->id));?>">Photos</a>
 			</li>
 			<li class="btn-primary">
-				<a href="<?php echo Yii::app()->createUrl('profile/activities', array('id' => $model->id));?>">Activities</a>
+				<a href="<?php echo Yii::app()->createUrl('profile/reviews', array('id' => $model->id));?>">Reviews</a>
 			</li>
 		</ul>
 	</div>	
@@ -24,11 +24,11 @@
 <?php 
 	$fullname = ucwords($model->profile->firstname." ".substr($model->profile->lastname, 0,1).".");
 $this->pageTitle=$fullname.UserModule::t(" Profile").' - '.Yii::app()->name;
-?><h2><?php echo $fullname;
+?><h3><?php echo $fullname;
 	  if(Yii::app()->user->id==$model->id){
-	  	 echo"<span class='h2span'><a href='".Yii::app()->createUrl('user/profile/edit')."'>( Edit Profile )</a></span>";}
+	  	 echo"<span class='h3span'><a href='".Yii::app()->createUrl('user/profile/edit')."'>( Edit Profile )</a></span>";}
 	  ?> 
-  </h2>
+  </h3>
 
 <?php if(Yii::app()->user->hasFlash('profileMessage')): ?>
 <div class="success">

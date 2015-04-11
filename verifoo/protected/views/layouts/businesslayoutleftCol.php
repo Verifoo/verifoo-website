@@ -73,8 +73,8 @@
 			
 				if(Yii::app()->user->id!=$model->user_id):
 			?>
-					<li><a href="#" data-toggle = 'modal' data-target ='#sendmessage-form' id="bsend<?php echo $model->id;?>" business-id="<?php echo $model->id;?>" business-id="<?php //echo $following;?>" >Send message</a></li>
-					<li><a href="#" class="" id="bfollow<?php echo $model->id;?>" business-id="<?php echo $model->id;?>" follow-id="<?php echo $following;?>" ><?php if($following==0){echo ' Follow ';}else{echo ' Stop Following';}?></a></li>
+					<li><a href="#" data-toggle = 'modal' data-target ='#sendmessage-form' id="bsend<?php echo $model->id;?>" business-id="<?php echo $model->id;?>" business-id="<?php //echo $following;?>" ><?php echo TbHtml::icon(TbHtml::ICON_ENVELOPE);?> Send message</a></li>
+					<li><a href="#" class="" id="bfollow<?php echo $model->id;?>" business-id="<?php echo $model->id;?>" follow-id="<?php echo $following;?>" ><?php if($following==0){echo TbHtml::icon(TbHtml:: ICON_PLUS_SIGN).' Follow ';}else{echo TbHtml::icon(TbHtml:: ICON_OK_SIGN).' Following';}?></a></li>
 		<?php
 				else:
 						$nf=Businessfollow::model()->count('business_id=:bID',array(':bID'=>$model->id));
@@ -123,7 +123,10 @@ var params = "data_id="+data_id+"&follow_id="+data_follow;
             success: function(server_response) {	
 			var obj = jQuery.parseJSON(server_response);
 				$('#bfollow<?php echo $model->id;?>').attr('follow-id',obj.id);
-				$('#bfollow<?php echo $model->id;?>').text(obj.status);			
+				if(obj.status=="Follow")
+					$('#bfollow<?php echo $model->id;?>').html('<i class="icon-plus-sign"></i> '+obj.status);
+				else
+					$('#bfollow<?php echo $model->id;?>').html('<i class="icon-ok-sign"></i> '+obj.status);
             	}
             });
    
@@ -137,7 +140,7 @@ var params = "data_id="+data_id+"&follow_id="+data_follow;
 		if(sizeof($displayedReports)>0)	:
 				
 	?>
-		<div>
+		<div class="reviewChart">
 			<script type="text/javascript">
 			      google.load("visualization", "1", {packages:["corechart"]});
 			      google.setOnLoadCallback(drawChart);
@@ -159,7 +162,8 @@ var params = "data_id="+data_id+"&follow_id="+data_follow;
 					        duration: 1000,
 					        easing: 'out',
 					      },
-			          	hAxis:{viewWindow: {min: 0, max: 5.6}}
+			          	hAxis:{viewWindow: {min: 0, max: 5.6}},
+			          	backgroundColor: { fill: "#F4F4F4" }
 			        };
 			
 			        var chart = new google.visualization.BarChart(document.getElementById('chart_div<?php echo $model->id;?>'));

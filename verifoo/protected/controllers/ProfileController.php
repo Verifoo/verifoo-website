@@ -25,7 +25,7 @@ class ProfileController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','search','photos','friends'),
+				'actions'=>array('index','view','search','photos','reviews','friends'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -97,6 +97,29 @@ class ProfileController extends Controller
 			'profile'=>$model->profile
 		));
 	}
+	public function actionReviews($id)
+	{
+		$baseUrl = Yii::app()->baseUrl; 
+		$cs = Yii::app()->getClientScript();
+		$cs->registerCssFile($baseUrl.'/css/business.css');
+		$cs->registerScriptFile('/js/jquery.rating.js'); 
+		
+		$model = $this->loadUser();
+		$reviews=new CActiveDataProvider('Review', array(
+		    'criteria'=>array('condition'=>'reviewer_id='.$model->id,
+		    'alias'=>'review',
+		    'with'=>array('business'=>array('alias'=>'business')),
+		    'order' => 'review.id DESC',
+		    ),
+		    'pagination'=>array('pageSize'=>'16'),
+		));	
+		
+		
+		$this->render('reviews',array(
+	    	'model'=>$model,'reviews'=>$reviews,
+			'profile'=>$model->profile
+		));
+	}
 	public function actionFollow()
 	{
 		$reviewerid = $_GET['reviewer_id'];
@@ -159,14 +182,21 @@ class ProfileController extends Controller
 			
 		}
 	}
-	public function actionPhotos($id)
+	public function actionPhotos()
 	{
 		$baseUrl = Yii::app()->baseUrl; 
 		$cs = Yii::app()->getClientScript();
 		$cs->registerCssFile($baseUrl.'/css/business.css');
-		$model=$this->loadUser($id);
+		if(isset($_GET['id']))
+			$model=$this->loadUser($_GET['id']);
+		else {
+			if(isset(Yii::app()->user->id))
+				$model=$this->loadUser(Yii::app()->user->id);
+			else
+				$this->render('error', $error);
+		}
 		$photos=new CActiveDataProvider('Businessphoto', array(
-		    'criteria'=>array('condition'=>'photo_owner='.$id,
+		    'criteria'=>array('condition'=>'photo_owner='.$model->id,
 		    'alias'=>'bphotos',
 		    ),
 		    'pagination'=>array('pageSize'=>'25'),

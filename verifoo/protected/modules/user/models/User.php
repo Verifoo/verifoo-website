@@ -67,7 +67,7 @@ class User extends CActiveRecord
             array('lastvisit_at', 'default', 'value' => '0000-00-00 00:00:00', 'setOnEmpty' => true, 'on' => 'insert'),
 			array('username, email, superuser, status', 'required'),
 			array('superuser, status', 'numerical', 'integerOnly'=>true),
-			array('id, username, password, email, zipcode, activkey, create_at, lastvisit_at, superuser, status, bday,image', 'safe', 'on'=>'search'),
+			array('id, username, password, email, zipcode, activkey, create_at, lastvisit_at, superuser, status, bday, image', 'safe', 'on'=>'search'),
 		):((Yii::app()->user->id==$this->id)?array(
 			array('username, email, bday', 'required'),
 			array('username', 'length', 'max'=>20, 'min' => 3,'message' => UserModule::t("Incorrect username (length between 3 and 20 characters).")),
@@ -77,7 +77,7 @@ class User extends CActiveRecord
 			array('username', 'match', 'pattern' => '/^[A-Za-z0-9_]+$/u','message' => UserModule::t("Incorrect symbols (A-z0-9).")),
 			array('email', 'unique', 'message' => UserModule::t("This user's email address already exists.")),
 		):array(
-			array('id, username, password, email, zipcode, activkey, create_at, lastvisit_at, superuser, status, bday,image	', 'safe', 'on'=>'search'),
+			array('id, username, password, email, zipcode, activkey, create_at, lastvisit_at, superuser, status, bday, image	', 'safe', 'on'=>'search'),
 		)));
 	}
 

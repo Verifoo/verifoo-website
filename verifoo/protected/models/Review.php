@@ -5,15 +5,11 @@
  *
  * The followings are the available columns in table 'review':
  * @property integer $id
- * @property string $business_id
+ * @property integer $business_id
  * @property integer $reviewer_id
  * @property string $comment
  * @property string $date_review
  * @property integer $rate
- *
- * The followings are the available model relations:
- * @property Business $business
- * @property Users $reviewer
  */
 class Review extends CActiveRecord
 {
@@ -34,8 +30,7 @@ class Review extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('business_id, reviewer_id, comment, date_review, rate', 'required'),
-			array('reviewer_id, rate', 'numerical', 'integerOnly'=>true),
-			array('business_id', 'length', 'max'=>20),
+			array('business_id, reviewer_id, rate', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, business_id, reviewer_id, comment, date_review, rate', 'safe', 'on'=>'search'),
@@ -50,8 +45,8 @@ class Review extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'business' => array(self::BELONGS_TO, 'Business', 'business_id'),
 			'user' => array(self::BELONGS_TO, 'User', 'reviewer_id'),
+			'business' => array(self::BELONGS_TO, 'Business', 'business_id'),
 		);
 	}
 
@@ -89,7 +84,7 @@ class Review extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('business_id',$this->business_id,true);
+		$criteria->compare('business_id',$this->business_id);
 		$criteria->compare('reviewer_id',$this->reviewer_id);
 		$criteria->compare('comment',$this->comment,true);
 		$criteria->compare('date_review',$this->date_review,true);

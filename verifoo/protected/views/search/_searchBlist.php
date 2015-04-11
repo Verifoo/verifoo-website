@@ -13,8 +13,8 @@
 	<div class="searchbDescription">
 		<div class="topDesc">
 			<div class="bName"><h6><?php echo $data->businessname;?></h6></div>
-			<div class="bStars">
-				<div class="star" style="width:<?php echo (16*round($data->reviewAve));?>px"></div>
+			<div class="bStars2">
+				<div class="star" style="width:<?php echo (22*round($data->reviewAve));?>px"></div>
 			</div>
 		</div>
 		<div class="midDesc<?php echo $data->id;?>">

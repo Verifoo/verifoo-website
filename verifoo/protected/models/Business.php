@@ -5,7 +5,7 @@
  *
  * The followings are the available columns in table 'business':
  * @property string $id
- * @property integer $user_id
+ * @property string $user_id
  * @property string $businessname
  * @property string $description
  * @property string $address
@@ -14,21 +14,32 @@
  * @property string $zipcode
  * @property integer $dti_verified
  * @property integer $status
- * @property string $phonenumber
  * @property string $logo
  * @property string $slug
  * @property string $datecreated
- *
- * The followings are the available model relations:
- * @property Users $user
- * @property Businessfollow[] $businessfollows
- * @property Businessphoto[] $businessphotos
+ * @property string $phonenumber
  */
 class Business extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
+	 public $business_creator,$creator_firstname,$creator_lastname,$email;
+	 const DTI_VERIFIED = 1;
+	 const DTI_UNVERIFIED = 0;
+	 const STATUS_BANNED = -1;
+	 const STATUS_NOACTIVE = 0;
+	 const STATUS_ACTIVE = 1;
+	 
+	public function getDTIverification()
+    {
+        return array(
+             self::DTI_VERIFIED=>1,
+             self::DTI_UNVERIFIED=>0,
+             self::STATUS_BANNED=>-1,
+         );
+    }
+	
 	public function tableName()
 	{
 		return 'business';
@@ -42,37 +53,22 @@ class Business extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('user_id, businessname, address, views, zipcode, dti_verified, datecreated', 'required'),
-			array('user_id, dti_verified, status', 'numerical', 'integerOnly'=>true),
-			array('businessname, phonenumber', 'length', 'max'=>50),
-			array('address, category, slug', 'length', 'max'=>255),
-			array('views', 'length', 'max'=>20),
+			array('user_id, businessname, views, zipcode, address, dti_verified, datecreated', 'required'),
+			array('dti_verified', 'numerical', 'integerOnly'=>true),
+			array('user_id, views', 'length', 'max'=>20),
+			array('businessname,phonenumber', 'length', 'max'=>50),
+			array('category, slug, address', 'length', 'max'=>255),
 			array('zipcode', 'length', 'max'=>10),
 			array('logo', 'length', 'max'=>100),
 			array('description', 'safe'),
+			array('status', 'in', 'range'=>array(self::STATUS_NOACTIVE,self::STATUS_ACTIVE,self::STATUS_BANNED)),
+			array('dti_verified', 'in', 'range'=>array(self::DTI_UNVERIFIED,self::DTI_VERIFIED)),
+			array('dti_verified, status', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, user_id, businessname, description, address, views, category, zipcode, dti_verified, status, phonenumber, logo, slug, datecreated', 'safe', 'on'=>'search'),
+			array('id, user_id, businessname, description, address, views, category, zipcode, dti_verified, logo, slug, phonenumber, datecreated,status', 'safe', 'on'=>'search'),
 		);
 	}
-	
-	/**
-	 * @return array relational rules.
-	 */
-	public function relations()
-	{
-		// NOTE: you may need to adjust the relation name and the related
-		// class name for the relations automatically generated below.
-		return array(
-			'user' => array(self::BELONGS_TO, 'User', 'user_id'),
-			'businessfollows' => array(self::HAS_MANY, 'Businessfollow', 'business_id'),
-			'businessphotos' => array(self::HAS_MANY, 'Businessphoto', 'business_id'),
-			'businessprofile' => array(self::HAS_ONE, 'Businessprofile', 'business_id'),
-			'reviewAve'=>array(self::STAT, 'Review', 'business_id', 'select' => 'AVG(rate)'),
-			'reviewCount'=>array(self::STAT, 'Review', 'business_id'),
-		);
-	}
-
 	public function scopes()
     {
         return array(
@@ -88,8 +84,38 @@ class Business extends CActiveRecord
            
         );
     }
-	
-	
+	/**
+	 * @return array relational rules.
+	 */
+	public function relations()
+	{
+		// NOTE: you may need to adjust the relation name and the related
+		// class name for the relations automatically generated below.
+		return array(
+			'user' => array(self::BELONGS_TO, 'User', 'user_id'),
+			'businessprofile' => array(self::HAS_ONE, 'Businessprofile', 'business_id'),
+			'businessphoto' => array(self::HAS_ONE, 'Businessphoto', 'business_id'),
+			'reviewAve'=>array(self::STAT, 'Review', 'business_id', 'select' => 'AVG(rate)'),
+			'reviewCount'=>array(self::STAT, 'Review', 'business_id'),
+		);
+	}
+	public static function itemAlias($type,$code=NULL) {
+		$_items = array(
+			'BusinessStatus' => array(
+				self::STATUS_NOACTIVE => UserModule::t('Not Active'),
+				self::STATUS_ACTIVE => UserModule::t('Active'),
+				self::STATUS_BANNED => UserModule::t('Banned'),
+			),
+			'DTIStatus' => array(
+				'0' => UserModule::t('DTI Unverified'),
+				'1' => UserModule::t('DTI Verified'),
+			),
+		);
+		if (isset($code))
+			return isset($_items[$type][$code]) ? $_items[$type][$code] : false;
+		else
+			return isset($_items[$type]) ? $_items[$type] : false;
+	}
 	/**
 	 * @return array customized attribute labels (name=>label)
 	 */
@@ -111,23 +137,7 @@ class Business extends CActiveRecord
 			'phonenumber' => 'Contact Number',
 		);
 	}
-	public static function itemAlias($type,$code=NULL) {
-		$_items = array(
-			'BusinessStatus' => array(
-				self::STATUS_NOACTIVE => UserModule::t('Not Active'),
-				self::STATUS_ACTIVE => UserModule::t('Active'),
-				self::STATUS_BANNED => UserModule::t('Banned'),
-			),
-			'DTIStatus' => array(
-				'0' => UserModule::t('DTI Unverified'),
-				'1' => UserModule::t('DTI Verified'),
-			),
-		);
-		if (isset($code))
-			return isset($_items[$type][$code]) ? $_items[$type][$code] : false;
-		else
-			return isset($_items[$type]) ? $_items[$type] : false;
-	}
+
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 *

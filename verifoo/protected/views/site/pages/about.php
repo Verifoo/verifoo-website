@@ -1,6 +1,6 @@
 <?php
 /* @var $this SiteController */
-
+$this->layout='pagelayout';
 $this->pageTitle=Yii::app()->name . ' - About';
 $this->breadcrumbs=array(
 	'About',

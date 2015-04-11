@@ -37,7 +37,7 @@ class CustomSearch{
 					$businesses=new CActiveDataProvider('Business', array(
 					    'criteria'=>array(
 					    		
-					    		'select'=> "id,businessname,category,
+					    		'select'=> "id,businessname,dti_verified,category,
 							            description,logo,address,phonenumber,
 							            (
 							                (

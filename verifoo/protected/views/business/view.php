@@ -12,25 +12,30 @@ Yii::app()->user->returnUrl = Yii::app()->request->requestUri;
 		<li class="btn-primary">
 			<a href="<?php echo Yii::app()->createUrl('business/photos', array('id' => $model->id));?>">Photos</a>
 		</li>
-		<li class="btn-primary">
-			<a href="<?php echo Yii::app()->createUrl('business/photos', array('id' => $model->id));?>">Activities</a>
-		</li>
+		
 	</ul>
 </div>
-<h2><?php echo $model->businessname; 
+
+<h3 title="<?php echo $model->businessname;?>">
+<?php if($model->dti_verified==1):;?>
+	<div class="verified">
+		<img src="<?php echo Yii::app()->getBaseUrl(true).'/images/verified.png' ?>" alt="Business Verified" title="Business Verified"/>
+	</div>
+<?php endif;?>	
+	<?php echo MHelper::String()->truncate($model->businessname, 32); 
 			echo '<div class="bStars">';
 					//for($x=1;$x<=$numstar;$x++)
-					 echo '<div class="star" style="width:'.(16*round($model->reviewAve)).'px"></div>';
+					 echo '<div class="star" style="width:'.(22*round($model->reviewAve)).'px"></div>';
 				
 			echo'</div>';
 		if(Yii::app()->user->id==$model->user_id){
-	  	 echo"<span class='h2span'>
+	  	 echo"<span class='h3span'>
 	  	 		<a href='".Yii::app()->createUrl('business/update', array('id' => $model->id))."'>( Edit Business )</a>
 	  	 	</span>";
 		}
 		//echo $model->reviewSum."--".$model->reviewCount.":".round($model->reviewSum/$model->reviewCount);
 	?>
-	
+</h3>
 <div class="socialsites">
 	<?php if(isset($profile->facebook_page) && $profile->facebook_page!=''):?>
 				<a href="https://www.facebook.com/<?php echo $profile->facebook_page;?>" target="_blank"><img src="<?php echo Yii::app()->getBaseUrl(true).'/images/facebook_icon.png' ?>"></a>
@@ -42,20 +47,18 @@ Yii::app()->user->returnUrl = Yii::app()->request->requestUri;
 			<a href="https://plus.google.com/<?php echo $profile->gplus_page;?>" target="_blank"><img src="<?php echo Yii::app()->getBaseUrl(true).'/images/google_icon.png' ?>"></a>
 	<?php endif;?>		
 </div>	
-</h2>
-
 <div class="businessInfo">
 	<p class="businessfield">Founded: <span class="lightblue"><?php echo date("M d, Y",strtotime($profile->foundeddate));?></span></p>
 	<?php if(isset($profile->dti_number) && $profile->dti_number!=''):?>
 	<p class="businessfield">DTI No.: <span class="lightblue"><?php echo ucwords($profile->dti_number);?></span></p>
 	<?php endif;?>
-	<p class="businessfield">Open Schedule: <span class="lightblue"><?php echo ucwords($profile->openschedule);?></span></p>
+	
 	<?php if(isset($profile->website) && $profile->website!=''):?>
 	<p class="businessfield">Website: <span class="lightblue"><?php echo ucwords($profile->website);?></span></p>
 	<?php endif;?>
 	<p class="businessfield">Contact #: <span class="lightblue"><?php echo $model->phonenumber;?></span></p>
 	
-	<p class="businessfield">Views: <span class="lightblue"><?php echo $model->views;?></span></p>
+	<p class="businessfieldBlock">Open Schedule: <span class="lightblue"><?php echo ucwords($profile->openschedule);?></span></p>
 	<p class="businessfieldBlock">Business Type: <span class="lightblue"><?php 
 		$category = explode(":",$model->category);
 	echo implode(", ",$category);	
@@ -94,6 +97,48 @@ else:
 endif;
 
 ?>
+<a name="photos"></a>
+<div class="businessphotos">
+<h3>Photos </h3>
+
+<?php
+
+		$this->widget('application.extensions.fancybox.EFancyBox', array(
+		    'target'=>'.fancybox',
+		    
+		    'config'=>array( 	'nextEffect'=> 'fade',
+		    					'prevEffect'=>'fade',
+		    					'helpers'=>array('title'=>array('type'=>'inside')),
+		    					'beforeShow'=>'function(){alert(1);}',
+		    					'afterShow'=>'function(){twttr.widgets.load();}'
+						   ),
+		));
+		
+	$emptyText = 'No photos uploaded yet';
+$this->widget('zii.widgets.CListView', array(
+					'dataProvider'=>$photos,
+					'itemView'=>'_businessPhotos',
+					'id'=>"review_list",
+					'enablePagination'=>true,
+					'emptyText' => $emptyText,
+					//'template'=>"{pager}\n{items}\n{pager}",
+					'summaryText'=>'',
+					//'pager' => array('class' => 'CLinkPager', 'header' => '','maxButtonCount' => 5), 
+					'pager' => array(
+		                    'class'=>'ext.infiniteScroll.IasPager', 
+					        'rowSelector'=>'.photolist', 
+					        'listViewId'=>'review_list', 
+					        'header'=>'',
+					        'loaderText'=>'Loading...',
+					        'options'=>array(
+						            'history'=>false, 
+						            'triggerPageTreshold'=>12, 
+						            'trigger'=>'Load more'
+					        	),
+	                   )
+				)); 
+?>
+</div>
 <a name="reviews"></a>
 <div class="reviews">
 	<h3>Reviews </h3>

@@ -26,7 +26,7 @@ a img {border:none;}
 
 /* typography.css */
 html {font-size:100.01%;}
-body {font-size:75%;color:#222;background:#fff;font-family:"Helvetica Neue", Arial, Helvetica, sans-serif;}
+/*body {font-size:75%;color:#222;background:#fff;font-family:"Helvetica Neue", Arial, Helvetica, sans-serif;}*/
 h1, h2, h3, h4, h5, h6 {font-weight:normal;color:#111;}
 h1 {font-size:2em;line-height:1;margin-bottom:0.5em;}
 h2 {font-size:1.6em;margin-bottom:0.75em;}
@@ -244,10 +244,10 @@ hr.space {background:#fff;color:#fff;visibility:hidden;}
 
 /***********verifoo CSS styles********************/
 .bPics a img{border: 1px solid #ccc;}
-.card-1{width:470px;}
+.card-1{width:444px;}
 #pageHome{width:980px;min-height:100%;margin:0 auto;display:block;}
-#indexLogoText{font-family: 'GothamRoundedBold';font-size:81px;color:#fff; text-transform:uppercase;margin-bottom:10px;}
-#indexBody{margin:0 auto;width:600px;padding-top:64px;}
+#indexLogoText{font-family: 'GothamRoundedBold';font-size:81px;color:#fff; text-transform:uppercase;margin-bottom:10px;  line-height: 80px;}
+#indexBody{margin:0 auto;width:600px;padding-top:256px;}
 .d_img,.d_text{display:inline-block;vertical-align:bottom;}
 .d_text{margin-bottom:40px;}
 .tagline{font-family:'GothamRoundedMedium';font-size:24px;-webkit-border-radius: 16px; -moz-border-radius: 16px; border-radius: 16px; border:2px solid #fff;color:#fff;text-align:center;}
@@ -262,10 +262,9 @@ div.form input.i_sub {
 	background: transparent;
 	border: 1px solid #fff;
 	color: #fff;
-	padding: 16px;
-	width: 128px;
+	padding: 16px 24px;
 	text-align: center;
-	margin-top: 4px;
+	margin-top: 16px;
 	vertical-align: top;
 	display: inline-block;
 	margin-right: 32px;
@@ -281,7 +280,7 @@ div.form input.i_sub {
 	padding: 13px;
 	display: inline-block;
 	width: 128px;
-	margin-top: 4px;
+	margin-top: 16px;
 	cursor:pointer;
 }
 #topOfHeader ul li a{color:#fff;text-decoration:none;}
@@ -290,18 +289,18 @@ div#signin {color: #000}
 {
 	margin-top: 5px;
 	margin-bottom: 5px;
-	border: 1px solid #C9E0ED;
 	padding: 15px 10px 10px 12px;
+	min-height: 512px;
 }
-
-#header
+#header{background:#fff;}
+#headerInner
 {
 	width: 1200px;
 	padding: 0;
 	margin: 0px auto;
 	margin-bottom: 0px;
 }
-
+.verticalMenu ul{list-style-type: none;}
 #content
 {
     padding: 20px;
@@ -336,4 +335,26 @@ div#signin {color: #000}
 {
 	padding: 10px 20px;
 	font-size: 200%;
+}
+.headSearch {
+  	display: inline-block;
+    width: 448px;
+}
+.headSearch form{margin: 0px;}
+input#searchbar {
+   width: 312px;
+  border-radius: 0px;
+  float: left;
+  height: 22px;
+}
+input#i_search{
+    background: #fcad17 url('../images/icon-search.png') no-repeat center;
+    height: 32px;
+    width: 32px;
+    float: left;
+}
+div#errorlanding {
+  min-height: 556px;
+  position: relative;
+  background: #0a53b9 url(/images/error.png) center bottom no-repeat;
 }

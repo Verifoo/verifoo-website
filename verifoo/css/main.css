@@ -46,6 +46,11 @@ body
 	position: absolute;
 	display: block;
 }
+#searchlist .sblist {
+	border-bottom: 1px dashed #D3CECE;
+	padding: 8px;
+	width: 636px
+}
 .searchedKeywords div{
   display:inline-block; 
   padding:8px 8px;
@@ -147,9 +152,15 @@ div.form .rememberMe label
 
 
 .socialsites {
-	display: inline-block;
-	float: right;
+	display: block;
+    margin-bottom: 8px;
 }
+.bStars_a {
+  margin-top: 0px;
+  display: inline-block;
+  margin-left: 8px;
+}
+
 .bPics {
 	display: inline-block;
 	width: 160px;
@@ -170,7 +181,7 @@ div.breadcrumbs
 .businessInfo p.businessfieldBlock{
 	display:block;
 	width: 99%;
-	margin-bottom: 16px;
+	margin-bottom: 4px;
 }
 
 .businessfieldBlock p span, 
@@ -270,9 +281,9 @@ div.search-form
     width: 100%;
     top: 0px;
 }
-.topHeaderWrapper{width:1200px;margin:0 auto;padding-top: 12px;}
+.topHeaderWrapper{width:1200px;margin:0 auto;padding-top: 8px;}
 .topHeaderWrapper span{float:left;}
-.topHeaderWrapper ul{float:right;}
+.topHeaderWrapper ul{float:right; margin:4px 0 10px 25px;}
 .topHeaderWrapper ul li{display:inline-block; border-right:1px solid #fff;padding:0 16px;}
 .topHeaderWrapper ul li:last-child {border-right: none !important;}
 
@@ -304,7 +315,7 @@ div#b_rightCol {
 }
 div#businessLCol{
 	width: 260px;
-	border: 1px solid #ff0;
+	border: 1px solid #CACACA;
 	vertical-align: top;
 	float: left;
 	position: relative;
@@ -322,29 +333,29 @@ div#businessRCol{
 	border: 1px solid #ffcc00;
 	background: #fff;
 }
-div#businessRColBottom{
-	margin-top:16px;
-	display: inline-block;
-	vertical-align: top;
-	width: 660px;
-	padding-left: 16px;
-	padding-right: 16px;
-	padding-bottom:32px;
-	border: 1px solid #ffcc00;
-	background: #fff;
-}
-.rColWrapper{display:inline-block;}
+div#businessLCol ul,
+div#businessLCol ol{margin: 0 0 10px 8px;}
+div#businessRCol h2{color: #fba01b;}
 .searchMainBox {
 	margin: 20px auto;
 	text-align: center;
 }
-
+.rRow {
+  padding-left:32px;
+  width: 300px;
+  vertical-align: top;
+  display: inline-block;
+}
+.lRow {
+  width: 480px;
+  display: inline-block;
+}
 .userprofile {
 	text-align: center;
 	padding: 5px 0px;
 }
-h2 span.h2span{font-size:13px;float:none;color:#0a53b9;margin-left: 10px;}
-h2 span.h2span:hover{ text-decoration:underline;cursor:pointer;}
+h3 span.h3span{font-size:13px;float:none;color:#0a53b9;margin-left: 10px;}
+h3 span.h3span:hover{ text-decoration:underline;cursor:pointer;}
 .verticalMenu {
 	padding-top: 0px;
 }
@@ -378,11 +389,27 @@ div#businessRCol .businessInfo .businessDescription p {
 	display: inline-block;
 	margin-left: 8px;
 }
+.bStars2{
+	margin-top: 0px;
+	display: inline-block;
+}
+.socialsites img {
+  margin: 0px 1px;
+}
+.verified {
+  display: inline-block;
+}
+.bPics .verified img{border:0px;}
+.bStars2 div.star,
 .bStars div.star{
 	display: inline-block;
-	background: url(star.gif) 0 -32px repeat;
-	height: 16px;
+	/*background: url(../imagesstar.gif) 0 -32px repeat;*/
+	background: url(../images/rstar.png) 0 0px repeat;
+	height: 29px;
 }
+#searchlist .card-1 .bName h4{margin-top:0px;}
+#searchlist .card-1 .bName a{color:#fba01b; font-size: 20px;}
+#searchlist .sb_d{  font-family: 'GothamRoundedMedium'; color: #878585; font-size: 14px;}
 .reviewPostedDate {
 	color: #A19999;
 	font-size: 13px;
@@ -449,4 +476,35 @@ textarea#Review_comment {
 }
 .friendlist {
   margin-bottom: 32px;
+}
+.fancybox-title iframe {
+    min-height: 30px;
+    vertical-align: middle;
+}
+h1#lText{  font-size: 16px;
+  	line-height: 16px;
+	float:left;
+	text-transform: uppercase;  margin-right: 8px;
+
+}
+.topHeaderWrapper h1#lText span{float:none;}
+.hBDesc{min-height: 128px;}
+@media only screen and (max-width:1366px){
+	#indexBody{padding-top: 128px;}
+	.topHeaderWrapper, #headerInner{width: 90%;}
+} 
+
+@media only screen and (max-width:960px){
+	#pageHome {width: 96%;}
+} 
+@media only screen and (max-width:768px){
+	.indexSearch {width: 70%;
+}
+@media only screen and (max-width:480px){
+	#indexBody {padding-top: 128px;  width: 98%;}
+	#indexLogoText{  font-size: 52px;}
+	.tagline{font-size: 16px;}
+}
+@media only screen and (max-width:320px){
+
 }

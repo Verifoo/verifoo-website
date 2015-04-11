@@ -30,6 +30,8 @@ class RegistrationController extends Controller
             $model = new RegistrationForm;
             $profile=new Profile;
             $profile->regMode = true;
+            $userinterest = new UserInterests;
+
 			// ajax validator
 			if(isset($_POST['ajax']) && $_POST['ajax']==='registration-form')
 			{
@@ -44,6 +46,7 @@ class RegistrationController extends Controller
 					$model->attributes=$_POST['RegistrationForm'];
 					$profile->attributes=((isset($_POST['Profile'])?$_POST['Profile']:array()));
 					
+
 					if($model->validate()&&$profile->validate())
 					{
 						$soucePassword = $model->password;
@@ -57,6 +60,18 @@ class RegistrationController extends Controller
 						if ($model->save()) {
 							$profile->user_id=$model->id;
 							$profile->save();
+							$userinterest->attributes = $_POST['UserInterests'];
+
+							if(is_array($userinterest->interests) && sizeof($userinterest->interests)>0){
+								
+								foreach ($userinterest->interests as $key => $value) {
+									$usr_int = new UserInterests;
+									$usr_int->user_id = $model->id;
+									$usr_int->category = $value;
+								}
+								
+							}
+
 							if (Yii::app()->controller->module->sendActivationMail) {
 								$activation_url = $this->createAbsoluteUrl('/user/activation/activation',array("activkey" => $model->activkey, "email" => $model->email));
 								UserModule::sendMail($model->email,UserModule::t("You registered from {site_name}",array('{site_name}'=>Yii::app()->name)),UserModule::t("Please activate you account go to {activation_url}",array('{activation_url}'=>$activation_url)));
@@ -82,10 +97,13 @@ class RegistrationController extends Controller
 						}
 					} else $profile->validate();
 				}
-			    $this->render('/user/registration',array('model'=>$model,'profile'=>$profile,
+				$ct = new CustomTool;
+				$category = $ct->getCategoryList();
+			    $this->render('/user/registration',array('model'=>$model,'profile'=>$profile,'category'=>$category,
 				'monthsArray'=>$model->getMonthsArray(),
 				'daysArray'=>$model->getDaysArray(),
 				'yearsArray'=>$model->getYearsArray(),
+				'userinterest'=>$userinterest
 				));
 		    }
 	}
